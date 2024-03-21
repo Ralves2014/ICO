@@ -108,3 +108,5 @@ while N<Nmax
    N=N+1;
 end
 
+lambda = 0; % Ou qualquer outro valor padrão adequado(ver isto)
+

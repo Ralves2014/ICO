@@ -1,4 +1,4 @@
-function d = steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
+function d4 = steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
     % MÉTODO DE DECIDA MÁXIMA C/WOLFE (SDM- STEEPEST DESCENT METHOD)
     
     % ESTE m.FILE IMPLEMENTA O SDM PARA FUNÇÕES OBJETIVO f DEFINIDAS COMO FUNC-
@@ -14,7 +14,7 @@ function d = steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciai
     % ESTE M.file RECORRE A 3 m.FILES: 
     % - "nivelGraficos.m", "graficosLineSearch.m", "mean.m" E AINDA "Wolfe.m". 
     
-    d=1;
+    d4=1;
 
     % PARTE 1: CÁLCULO SIMBÓLICO DO VETOR GRADIENTE [IMPLEMENTADO PARA
     % Nvar=1 OU Nvar=2; SE Nvar>2 É NECESSÁRIO EDITAR O CÓDIGO]
@@ -45,10 +45,50 @@ function d = steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciai
     a=x_values; b=y_values; 
 
     % PARTE 4: IMPLEMENTAÇÃO DO MÉTODO SDM (PROCESSO ITERATIVO)
-
+    
     for i=1:NPontosIniciais
-        x=(b-a).*rand(Nvar,1)+a;
-        disp(x)
-    end
+        x=(b-a).*rand(Nvar,1)+a; 
+        Lista=[Lista, x];       
+        dfx=df(x);            
+        d=-dfx;               
+        beta0=.1;      
+        lambda=Wolfe(x,f,df,d,beta0);    % O PASSO lambda CONFORME AS
+                                         % CONDIÇÕES DE WOLFE, SEGUNDO 
+                                         % O FICHEIRO Wolfe.m                  
+        disp(lambda);
+        xNovo=x+lambda*d;
+        dfxNovo=df(xNovo);
+        Lista=[Lista, xNovo];
+        N=2;
+        
+        while norm(dfxNovo)>errodf && N<Nmax 
+        dNovo=-dfxNovo;       
+        
+        beta0=lambda*(dfx'*d)/(dfxNovo'*dNovo); % CÁLCULO DE beta0 PARA INICIAR 
+                                                % O ALGORITMO 2 (VER FICHEIRO 
+                                                % C/ ESCOLHA DE PTOS INICIAIS E
+                                                % PASSOS) SEGUNDO É USUAL NO
+                                                % SDM (TEM FÓRMULA ESPECÍFICA)
+
+        lambda=Wolfe(xNovo,f,df,dNovo,beta0);   % OBTENÇÃO DO NOVO PASSO lambda 
+                                                % CONFORME AS CONDIÇÕES DE WOL- 
+                                                % FE (FICHEIRO "Wolfe.m") PARA 
+                                                % VALORES ATUALIZADOS DA VARIÁ-
+                                                % VEL E DA DIREÇÃO DE BUSCA
+        xNovo=xNovo+lambda*dNovo;
+     
+        Lista=[Lista, xNovo];
+        N=N+1;          
+    
+        x=xNovo;
+        dfx=dfxNovo;
+        d=dNovo;                   
+        dfxNovo=df(xNovo);             
+        end 
+        
+        LNit=[LNit, N];             
+        Lopt=[Lopt, xNovo];         
+    end  
+
 
 end
