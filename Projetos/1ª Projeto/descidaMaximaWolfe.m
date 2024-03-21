@@ -51,6 +51,8 @@ S=f(v);
 dS=jacobian(S,v); 
 df=@(x) double(subs(dS,v,x)');  
 
+%disp("Expressao de df =");
+%disp(df);
                         
 
 % PARTE 3: DEFINIÇÃO DOS PARÂMETROS PARA OS CRITÉRIOS/CONDIÇÕES DE PARAGEM

@@ -12,7 +12,7 @@ function optimization_line_search_methods()
     errodf=15e-2;
     Nmax=getNmax()
     NPontosIniciais=getNPontosIniciais() 
-    x_values=[-11;-11]; y_values=[7;7];
+    x_values=[-11;-11]; x_values=[7;7];
     Nvar=2;
 
     % LISTA DE FUNÇOES OBJETIVO QUE VAO SER TESTADAS
@@ -21,7 +21,7 @@ function optimization_line_search_methods()
     f = @(x) ((x(1))^2 - 100)*((x(1))^2 - 61) + ((x(2))^2 - 25)*((x(2))^2 - 16) - 15*cos(x(1)-(7/5))*cos(x(2)-(9/2));
 
     
-    test = steepest_descent_wolfe_method(r, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
+    test = steepest_descent_wolfe_method(r, Nvar, Nmax, errodf, NPontosIniciais, a, b)
     
    
    
