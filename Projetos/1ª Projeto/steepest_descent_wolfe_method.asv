@@ -27,8 +27,6 @@ function d4 = steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosInicia
         v=[a; b];        
     end
 
-    disp(v);
-
     S=f(v);           
     dS=jacobian(S,v); 
     df=@(x) double(subs(dS,v,x)'); 
@@ -45,51 +43,70 @@ function d4 = steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosInicia
     a=x_values; b=y_values; 
 
     % PARTE 4: IMPLEMENTAÇÃO DO MÉTODO SDM (PROCESSO ITERATIVO)
-
-    % PARTE 6: IMPLEMENTAÇÃO DO MÉTODO SDM (PROCESSO ITERATIVO)
-
+    
     for i=1:NPontosIniciais
         x=(b-a).*rand(Nvar,1)+a; 
         Lista=[Lista, x];       
         dfx=df(x);            
         d=-dfx;               
-        beta0=.1;      % beta DE INICIALIZAÇÃO PARA A ESCOLHA DE PASSOS 
-        lambda=Wolfe(x,f,df,d,beta0);    % O PASSO lambda CONFORME AS CONDIÇÕES DE WOLFE, SEGUNDO O FICHEIRO Wolfe.m                  
+        beta0=.1;      
+        lambda=Wolfe(x,f,df,d,beta0);    % O PASSO lambda CONFORME AS
+                                         % CONDIÇÕES DE WOLFE, SEGUNDO 
+                                         % O FICHEIRO Wolfe.m                  
         disp(lambda);
-        xNovo=x+lambda*d;                     
-        
-        dfxNovo=df(xNovo);          
-        
-        Lista=[Lista, xNovo];     
-        N=2;       
+        xNovo=x+lambda*d;
+        dfxNovo=df(xNovo);
+        Lista=[Lista, xNovo];
+        N=2;
         
         while norm(dfxNovo)>errodf && N<Nmax 
         dNovo=-dfxNovo;       
         
         beta0=lambda*(dfx'*d)/(dfxNovo'*dNovo); % CÁLCULO DE beta0 PARA INICIAR 
-    %                                             O ALGORITMO 2 (VER FICHEIRO 
-    %                                             C/ ESCOLHA DE PTOS INICIAIS E
-    %                                             PASSOS) SEGUNDO É USUAL NO
-    %                                             SDM (TEM FÓRMULA ESPECÍFICA)
+                                                % O ALGORITMO 2 (VER FICHEIRO 
+                                                % C/ ESCOLHA DE PTOS INICIAIS E
+                                                % PASSOS) SEGUNDO É USUAL NO
+                                                % SDM (TEM FÓRMULA ESPECÍFICA)
+
         lambda=Wolfe(xNovo,f,df,dNovo,beta0);   % OBTENÇÃO DO NOVO PASSO lambda 
-    %                                             CONFORME AS CONDIÇÕES DE WOL- 
-    %                                             FE (FICHEIRO "Wolfe.m") PARA 
-    %                                             VALORES ATUALIZADOS DA VARIÁ-
-    %                                             VEL E DA DIREÇÃO DE BUSCA
-        xNovo=xNovo+lambda*dNovo;    
-        
-        Lista=[Lista, xNovo];        
-        N=N+1;                         
+                                                % CONFORME AS CONDIÇÕES DE WOL- 
+                                                % FE (FICHEIRO "Wolfe.m") PARA 
+                                                % VALORES ATUALIZADOS DA VARIÁ-
+                                                % VEL E DA DIREÇÃO DE BUSCA
+        xNovo=xNovo+lambda*dNovo;
+     
+        Lista=[Lista, xNovo];
+        N=N+1;          
     
-        x=xNovo;                       
-        dfx=dfxNovo;                   
-        d=dNovo;                      
+        x=xNovo;
+        dfx=dfxNovo;
+        d=dNovo;                   
         dfxNovo=df(xNovo);             
         end 
         
         LNit=[LNit, N];             
         Lopt=[Lopt, xNovo];         
-    end  
+    end
+
+    % PARTE 7: OBTENÇÃO DO MÍNIMO GLOBAL
+
+    xopt=Lopt(:,1); 
+    
+    for i=2:NPontosIniciais
+        if f(xopt)>f(Lopt(:,i)); 
+            xopt=Lopt(:,i);      
+        end
+    end
+
+    % PARTE 8: DEFINIÇÃO E EXIBIÇÃO DOS OUTPUTS (SÃO EXIBIDOS NA COMMAND WINDOW
+%          PORQUE NÃO É COLOCADO ";" NO FINAL, EMBORA SEM LEGENDA)(PARA OB-
+%          TER LEGENDA COLOCAR PARTE 9 DO FICHEIRO "descidaMaximaV1aula.m")
+
+xoptimo=xopt        
+foptimo=f(xopt)    
+dffinal=df(xopt)    
+Nmean=mean(LNit)   
+     
 
 
 end

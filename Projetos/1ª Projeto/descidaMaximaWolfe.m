@@ -29,8 +29,8 @@ clc
 
 % PARTE 1: DEFINIÇÃO DA FUNÇÃO OBJETIVO E DO Nº DE VARIÁVEIS
 
-%f=@(x) x(1)^4-12*x(1)^2-4*x(1)+x(2)^4-16*x(2)^2-5*x(2)-20*cos(x(1)-2.5)*cos(x(2)-2.9);
-f =@(x)  100*(x(2)-x(1)^2)^2 + (1-x(1))^2;
+f=@(x) x(1)^4-12*x(1)^2-4*x(1)+x(2)^4-16*x(2)^2-5*x(2)-20*cos(x(1)-2.5)*cos(x(2)-2.9);
+%f =@(x)  100*(x(2)-x(1)^2)^2 + (1-x(1))^2;
 Nvar=2;        
 
 
@@ -57,8 +57,8 @@ df=@(x) double(subs(dS,v,x)');
 
 % PARTE 3: DEFINIÇÃO DOS PARÂMETROS PARA OS CRITÉRIOS/CONDIÇÕES DE PARAGEM
 
-Nmax=36;  %11
-errodf=15e-2;  %1e-1
+Nmax=11;  %11
+errodf=1e-1;  %1e-1
 
 
 
@@ -72,9 +72,9 @@ Lopt=[];
 
 % PARTE 5: Nº DE PTOS INICIAIS E INTERVALO PARA SELEÇÃO DOS PTOS INICIAIS
 
-NPontosIniciais=8; %1
+NPontosIniciais=1; %1
 
-a=[-11;-11]; b=[7;7]; %-4 -4    4 4
+a=[-4;-4]; b=[4;4]; %-4 -4    4 4
 
 
 % PARTE 6: IMPLEMENTAÇÃO DO MÉTODO SDM (PROCESSO ITERATIVO)

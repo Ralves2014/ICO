@@ -21,7 +21,7 @@ function optimization_line_search_methods()
     f = @(x) ((x(1))^2 - 100)*((x(1))^2 - 61) + ((x(2))^2 - 25)*((x(2))^2 - 16) - 15*cos(x(1)-(7/5))*cos(x(2)-(9/2));
 
     
-    test = steepest_descent_wolfe_method(r, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
+    steepest_descent_wolfe_method(r, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
     
    
    
