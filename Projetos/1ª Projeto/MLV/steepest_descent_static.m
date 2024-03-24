@@ -1,8 +1,7 @@
-function [Lista, LNit, Lopt, a , b] = steepest_descent_static(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values, lambda)
+function [Lista, LNit, Lopt] = steepest_descent_static(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values, lambda)
 clc;
 
 syms a b 'real'
-
 
 v=[a; b]; 
         
@@ -36,5 +35,3 @@ for i=1:NPontosIniciais
     LNit=[LNit N];
 end
 
-
-function get
