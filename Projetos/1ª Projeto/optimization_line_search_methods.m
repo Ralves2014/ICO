@@ -22,14 +22,7 @@ function optimization_line_search_methods()
 
     
     steepest_descent_wolfe_method(r, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
-    
-   
-   
-
-    
-
-   
-    
+    %steepest_descent_wolfe_method(g, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
     
 
 end
