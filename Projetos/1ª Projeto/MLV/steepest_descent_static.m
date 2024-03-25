@@ -1,4 +1,4 @@
-function [Lista, LNit, Lopt] = steepest_descent_static(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values, lambda)
+function [Lista, LNit, Lopt] = steepest_descent_static(f, Nmax, errodf, PontosIniciais, x_values, y_values, lambda)
 clc;
 
 syms a b 'real'
@@ -17,9 +17,12 @@ Lopt=[];
 
 a=x_values; b=y_values;
 
-for i=1:NPontosIniciais
-    x=(b-a).*rand(Nvar,1)+a;
-    Lista=[Lista, x];   
+[~, num_points] = size(PontosIniciais);
+
+
+for i=1:num_points
+    x = PontosIniciais(:,i);
+    Lista=[Lista, x];
     dfx=df(x);           
     N=1;     
     
@@ -34,4 +37,3 @@ for i=1:NPontosIniciais
     Lopt=[Lopt x];
     LNit=[LNit N];
 end
-
