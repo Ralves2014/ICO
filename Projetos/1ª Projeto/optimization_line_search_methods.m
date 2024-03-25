@@ -11,7 +11,7 @@ function optimization_line_search_methods()
     % ATRIBUIÇAO DE VALORES A VARIAVEIS COMUNS
     errodf=15e-2;
     Nmax=getNmax()
-    NPontosIniciais=getNPontosIniciais() 
+    NPontosIniciais=getNPontosIniciais()
     x_values=[-11;-11]; y_values=[7;7];
     Nvar=2;
 
