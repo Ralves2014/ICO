@@ -32,7 +32,7 @@ function [Lista, LNit, Lopt] = newton_raphson(f, Nvar, Nmax, errodf, NPontosInic
         while norm(dfx) > errodf && N < Nmax  
             d = -inv(d2f(x)) * dfx;
 
-            lambda = Wolfe(x, f, df, d, 0.1); % Chama a função Wolfe para calcular lambda. beta0 pode ser qualquer valor, pois ao contrario de sdm o passo não e calculado iterativamente
+            lambda = Wolfe(x, f, df, d, 0.1); % Chama a função Wolfe para calcular lambda. beta0 pode ser qualquer valor, pois ao contrario de sdm o passo n
             x = x + lambda * d;  
             Lista = [Lista, x];       
             dfx = df(x);
