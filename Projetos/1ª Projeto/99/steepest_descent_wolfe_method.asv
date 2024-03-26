@@ -1,4 +1,4 @@
-function steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values)
+function steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciais, x_values, y_values,pontos_iniciais)
     % MÉTODO DE DECIDA MÁXIMA C/WOLFE (SDM- STEEPEST DESCENT METHOD)
     
     % ESTE m.FILE IMPLEMENTA O SDM PARA FUNÇÕES OBJETIVO f DEFINIDAS COMO FUNC-
@@ -42,8 +42,8 @@ function steepest_descent_wolfe_method(f, Nvar, Nmax, errodf, NPontosIniciais, x
 
     % PARTE 4: IMPLEMENTAÇÃO DO MÉTODO SDM (PROCESSO ITERATIVO)
     
-    for i=1:NPontosIniciais
-        x=(b-a).*rand(Nvar,1)+a; 
+    for i=1:pontos_iniciais
+        x= pontos_iniciais(:,i)
         Lista=[Lista, x];       
         dfx=df(x);            
         d=-dfx;               
