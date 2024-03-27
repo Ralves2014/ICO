@@ -1,4 +1,4 @@
-function [Lista, LNit, Lopt] = steepest_descent_wolfe(f, Nmax, errodf, PontosIniciais, x_values, y_values)
+function [Lista, LNit, Lopt, dffinal] = steepest_descent_wolfe(f, Nmax, errodf, PontosIniciais, x_values, y_values)
     syms a b 'real'   
 
     v=[a; b];        
@@ -56,5 +56,7 @@ for i=1:num_points
         end 
         
         LNit=[LNit, N];             
-        Lopt=[Lopt, xNovo];         
+        Lopt=[Lopt, xNovo];  
+        dffinal = df(Lopt(:, end));
+
 end

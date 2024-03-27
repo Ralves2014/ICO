@@ -1,4 +1,4 @@
-function [Lista, LNit, Lopt] = steepest_descent_static(f, Nmax, errodf, PontosIniciais, x_values, y_values, lambda)
+function [Lista, LNit, Lopt, dffinal] = steepest_descent_static(f, Nmax, errodf, PontosIniciais, x_values, y_values, lambda)
 clc;
 
 syms a b 'real'
@@ -36,4 +36,6 @@ for i=1:num_points
     
     Lopt=[Lopt x];
     LNit=[LNit N];
+    dffinal = df(Lopt(:, end));
+
 end

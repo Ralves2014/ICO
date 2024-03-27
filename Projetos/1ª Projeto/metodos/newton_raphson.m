@@ -1,4 +1,4 @@
-function [Lista, LNit, Lopt] = newton_raphson(f, Nmax, errodf, PontosIniciais, x_values, y_values)
+function [Lista, LNit, Lopt, dffinal] = newton_raphson(f, Nmax, errodf, PontosIniciais, x_values, y_values)
     clc;
 
     syms a b 'real'
@@ -43,5 +43,7 @@ function [Lista, LNit, Lopt] = newton_raphson(f, Nmax, errodf, PontosIniciais, x
 
         Lopt = [Lopt x];
         LNit = [LNit N];
+        dffinal = df(Lopt(:, end));
+        
 end 
 
